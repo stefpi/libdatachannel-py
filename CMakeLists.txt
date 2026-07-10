@@ -156,6 +156,7 @@ nanobind_add_module(libdatachannel_ext
   FREE_THREADED
   src/bind_libdatachannel.cpp
   src/libdatachannel_ext.cpp
+  src/rrhandler.cpp
 )
 
 # ビルド順序を保証するため依存関係を追加

@@ -11,16 +11,18 @@
 
 ## develop
 
+- [ADD] RTCP Receiver Report の損失統計を取得する RrHandler を追加する
+  - @stefpi
+- [ADD] Python 3.14t に対応する
+  - Free Threading 対応
+  - @voluntas
+- [ADD] Python 3.12 に対応する
+  - @voluntas
 - [UPDATE] cmake の最小バージョンを 4.3 にする
   - @voluntas
 - [UPDATE] scikit-build-core の最小バージョンを 0.12.0 にする
   - @voluntas
 - [UPDATE] nanobind の最小バージョンを 2.12.0 にする
-  - @voluntas
-- [ADD] Python 3.14t に対応する
-  - Free Threading 対応
-  - @voluntas
-- [ADD] Python 3.12 に対応する
   - @voluntas
 - [FIX] PeerConnection を明示的に close() せずに破棄したときに Python プロセスが停止する問題を修正する
   - 従来は破棄時の C++ デストラクタが GIL 保持下で内部処理を実行するため、 内部処理が呼ぶコールバックが GIL 待ちで止まり Python プロセスが永続停止していた

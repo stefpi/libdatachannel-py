@@ -25,6 +25,8 @@
 // libdatachannel
 #include <rtc/rtc.hpp>
 
+#include "rrhandler.hpp"
+
 // 標準ライブラリ
 #include <chrono>
 #include <thread>
@@ -1121,6 +1123,24 @@ void bind_plihandler(nb::module_& m) {
       .def("incoming", &PliHandler::incoming);
 }
 
+// ---- rrhandler.hpp ----
+
+void bind_rrhandler(nb::module_& m) {
+  nb::class_<RrStats>(m, "RrStats")
+      .def_ro("ssrc", &RrStats::ssrc)
+      .def_ro("fraction_lost", &RrStats::fractionLost)
+      .def_ro("packets_lost", &RrStats::packetsLost)
+      .def_ro("highest_seq_no", &RrStats::highestSeqNo)
+      .def_ro("jitter", &RrStats::jitter)
+      .def_ro("lsr", &RrStats::lsr)
+      .def_ro("dlsr", &RrStats::dlsr);
+
+  nb::class_<RrHandler, MediaHandler>(m, "RrHandler")
+      .def(nb::init<>())
+      .def("incoming", &RrHandler::incoming)
+      .def("get_stats", &RrHandler::getStats);
+}
+
 // ---- rtcpnackresponder.hpp ----
 
 const size_t RtcpNackResponder_DefaultMaxSize =
@@ -1525,6 +1545,7 @@ void bind_libdatachannel(nb::module_& m) {
   bind_pacinghandler(m);
   bind_rembhandler(m);
   bind_plihandler(m);
+  bind_rrhandler(m);
   bind_rtcpnackresponder(m);
   bind_rtcpreceivingsession(m);
   bind_rtcpsrreporter(m);
